@@ -59,15 +59,8 @@ const Budget = ({ className, ...rest }) => {
       setCashBalance(result.data.assetBalance); // Might wanna round to 2dp after that
     };
 
-    await axios(config).then(response => {
-      console.log(JSON.stringify(response.data.cashBalance));
-      setCashBalance(JSON.stringify(response.data.cashBalance));
-    // console.log(data);
-    });
-  });
     fetchData();
   }, []);
-
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
