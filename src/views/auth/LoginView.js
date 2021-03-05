@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import * as Yup from 'yup';
+import Cookies from 'universal-cookie';
 import { Formik } from 'formik';
 import axios from 'axios';
 import {
   Box,
   Button,
   Container,
-  Grid,
-  Link,
   TextField,
   Typography,
   makeStyles
 } from '@material-ui/core';
-import FacebookIcon from 'src/icons/Facebook';
-import GoogleIcon from 'src/icons/Google';
 import Page from 'src/components/Page';
+import * as CONST from '../../utils/constants';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.dark,
     height: '100%',
@@ -29,36 +26,39 @@ const useStyles = makeStyles((theme) => ({
 const LoginView = () => {
   const classes = useStyles();
   const navigate = useNavigate();
+  const cookies = new Cookies();
 
-  useEffect(async () => {
-    const temp = JSON.stringify({
-      username: 'Group24',
-      password: 'U1KAc0ZrKyMIzNX'
-    });
+  useEffect(() => {
+    const fetchData = async () => {
+      const temp = JSON.stringify({
+        username: 'Group24',
+        password: 'U1KAc0ZrKyMIzNX'
+      });
 
-    const config = {
-      method: 'post',
-      url:
-        'https://849rs099m3.execute-api.ap-southeast-1.amazonaws.com/techtrek/login',
-      headers: {
-        'x-api-key': '7hurCytKCQx5oqxCHwgx7K7jkNtBp4A71JmesZ0e',
-        'Content-Type': 'application/json'
-      },
-      data: temp
+      const config = {
+        method: 'post',
+        url: `${CONST.BASE_URL}${CONST.LOGIN}`,
+        headers: {
+          'x-api-key': `${CONST.X_API_KEY}`,
+          'Content-Type': 'application/json'
+        },
+        data: temp
+      };
+
+      const result = await axios(config);
+      if (result.errcode !== 200) {
+        // do something about error, but for now, ignore
+      }
+
+      const apiKey = result.data.accountKey;
+      cookies.set('apiKey', apiKey);
     };
 
-    await axios(config).then(response => {
-      console.log(JSON.stringify(response.data));
-      // setData();
-    });
-    // console.log(data);
-  });
+    fetchData();
+  }, []);
 
   return (
-    <Page
-      className={classes.root}
-      title="DBS Login"
-    >
+    <Page className={classes.root} title="DBS Login">
       <Box
         display="flex"
         flexDirection="column"
@@ -86,17 +86,11 @@ const LoginView = () => {
             }) => (
               <form onSubmit={handleSubmit}>
                 <Box mb={3}>
-                  <Typography
-                    color="textPrimary"
-                    variant="h2"
-                  >
+                  <Typography color="textPrimary" variant="h2">
                     Sign in
                   </Typography>
                 </Box>
-                <Box
-                  mt={3}
-                  mb={1}
-                >
+                <Box mt={3} mb={1}>
                   <Typography
                     align="center"
                     color="textSecondary"

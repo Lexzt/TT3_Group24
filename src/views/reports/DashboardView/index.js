@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  Container,
-  Grid,
-  makeStyles
-} from '@material-ui/core';
+import { Container, Grid, makeStyles } from '@material-ui/core';
 import Page from 'src/components/Page';
 import Budget from './Budget';
 import LatestOrders from './LatestOrders';
@@ -14,7 +10,7 @@ import TotalCustomers from './TotalCustomers';
 import TotalProfit from './TotalProfit';
 import TrafficByDevice from './TrafficByDevice';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.dark,
     minHeight: '100%',
@@ -27,25 +23,13 @@ const Dashboard = () => {
   const classes = useStyles();
 
   return (
-    <Page
-      className={classes.root}
-      title="Dashboard"
-    >
+    <Page className={classes.root} title="Dashboard">
       <Container maxWidth={false}>
-        <Grid
-          container
-          spacing={3}
-        >
-          <Grid
-            item
-            lg={3}
-            sm={6}
-            xl={3}
-            xs={12}
-          >
+        <Grid container spacing={3}>
+          <Grid item lg={3} sm={6} xl={3} xs={12}>
             <Budget />
           </Grid>
-          <Grid
+          {/* <Grid
             item
             lg={3}
             sm={6}
@@ -53,8 +37,8 @@ const Dashboard = () => {
             xs={12}
           >
             <TotalCustomers />
-          </Grid>
-          <Grid
+          </Grid> */}
+          {/* <Grid
             item
             lg={3}
             sm={6}
@@ -62,17 +46,11 @@ const Dashboard = () => {
             xs={12}
           >
             <TasksProgress />
-          </Grid>
-          <Grid
-            item
-            lg={3}
-            sm={6}
-            xl={3}
-            xs={12}
-          >
+          </Grid> */}
+          <Grid item lg={3} sm={6} xl={3} xs={12}>
             <TotalProfit />
           </Grid>
-          <Grid
+          {/* <Grid
             item
             lg={8}
             md={12}
@@ -80,8 +58,8 @@ const Dashboard = () => {
             xs={12}
           >
             <Sales />
-          </Grid>
-          <Grid
+          </Grid> */}
+          {/* <Grid
             item
             lg={4}
             md={6}
@@ -89,8 +67,8 @@ const Dashboard = () => {
             xs={12}
           >
             <TrafficByDevice />
-          </Grid>
-          <Grid
+          </Grid> */}
+          {/* <Grid
             item
             lg={4}
             md={6}
@@ -107,7 +85,7 @@ const Dashboard = () => {
             xs={12}
           >
             <LatestOrders />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </Page>

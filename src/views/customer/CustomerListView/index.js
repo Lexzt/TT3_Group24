@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Container, makeStyles } from '@material-ui/core';
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 
 import Page from 'src/components/Page';
 import Results from './Results';
@@ -19,6 +20,7 @@ const useStyles = makeStyles(theme => ({
 
 const CustomerListView = () => {
   const classes = useStyles();
+  const cookies = new Cookies();
 
   const [transactions, setTransactions] = useState([]);
   useEffect(() => {
@@ -31,7 +33,7 @@ const CustomerListView = () => {
         method: 'post',
         url: `${CONST.BASE_URL}${CONST.TRANSACTIONS_VIEW}`,
         headers: {
-          'x-api-key': `${CONST.X_API_KEY}`,
+          'x-api-key': `${cookies.get('apiKey')}`,
           'Content-Type': 'application/json'
         },
         data: temp
