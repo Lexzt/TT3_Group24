@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import {
-  Box,
-  Container,
-  makeStyles
-} from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { Box, Container, makeStyles } from '@material-ui/core';
+import axios from 'axios';
+
 import Page from 'src/components/Page';
 import Results from './Results';
 import Toolbar from './Toolbar';
-import data from './data';
+// import data from './data';
 
-const useStyles = makeStyles((theme) => ({
+import * as CONST from '../../../utils/constants';
+
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.dark,
     minHeight: '100%',
@@ -20,17 +20,47 @@ const useStyles = makeStyles((theme) => ({
 
 const CustomerListView = () => {
   const classes = useStyles();
-  const [customers] = useState(data);
+
+  const [transactions, setTransactions] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const temp = JSON.stringify({
+        accountKey: 'd075764b-c0de-4c6d-9794-f2de8389fa43'
+      });
+
+      console.log(fetchData);
+      const config = {
+        method: 'post',
+        url: `${CONST.BASE_URL}${CONST.TRANSACTIONS_VIEW}`,
+        headers: {
+          'x-api-key': `${CONST.X_API_KEY}`,
+          'Content-Type': 'application/json'
+        },
+        data: temp
+      };
+
+      const result = await axios(config);
+      console.log(result);
+      // setTransactions([...result.data,);
+      setTransactions([
+        ...result.data,
+        ...result.data,
+        ...result.data,
+        ...result.data,
+        ...result.data,
+        ...result.data
+      ]);
+    };
+
+    fetchData();
+  }, []);
 
   return (
-    <Page
-      className={classes.root}
-      title="Customers"
-    >
+    <Page className={classes.root} title="Customers">
       <Container maxWidth={false}>
         <Toolbar />
         <Box mt={3}>
-          <Results customers={customers} />
+          <Results transactions={transactions} />
         </Box>
       </Container>
     </Page>
