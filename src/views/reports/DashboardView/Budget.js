@@ -72,11 +72,8 @@ const Budget = ({ className, ...rest }) => {
             <Typography color="textSecondary" gutterBottom variant="h6">
               Cash Balance
             </Typography>
-            <Typography
-              color="textPrimary"
-              variant="h3"
-            >
-              {cashBalance}
+            <Typography color="textPrimary" variant="h3">
+              {`$${cashBalance}`}
             </Typography>
           </Grid>
           <Grid item>
@@ -87,7 +84,7 @@ const Budget = ({ className, ...rest }) => {
               color="textPrimary"
               variant="h3"
             >
-              {assetBalance}
+              {`$${assetBalance}`}
             </Typography>
             {/* <Avatar className={classes.avatar}>
               <MoneyIcon />
