@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import axios from 'axios';
 import {
   Box,
   Button,
@@ -29,10 +30,34 @@ const LoginView = () => {
   const classes = useStyles();
   const navigate = useNavigate();
 
+  useEffect(async () => {
+    const temp = JSON.stringify({
+      username: 'Group24',
+      password: 'U1KAc0ZrKyMIzNX'
+    });
+
+    const config = {
+      method: 'post',
+      url:
+        'https://849rs099m3.execute-api.ap-southeast-1.amazonaws.com/techtrek/login',
+      headers: {
+        'x-api-key': '7hurCytKCQx5oqxCHwgx7K7jkNtBp4A71JmesZ0e',
+        'Content-Type': 'application/json'
+      },
+      data: temp
+    };
+
+    await axios(config).then(response => {
+      console.log(JSON.stringify(response.data));
+      // setData();
+    });
+    // console.log(data);
+  });
+
   return (
     <Page
       className={classes.root}
-      title="Login"
+      title="DBS Login"
     >
       <Box
         display="flex"
@@ -43,13 +68,9 @@ const LoginView = () => {
         <Container maxWidth="sm">
           <Formik
             initialValues={{
-              email: 'demo@devias.io',
-              password: 'Password123'
+              username: 'Group24',
+              password: 'U1KAc0ZrKyMIzNX'
             }}
-            validationSchema={Yup.object().shape({
-              email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-              password: Yup.string().max(255).required('Password is required')
-            })}
             onSubmit={() => {
               navigate('/app/dashboard', { replace: true });
             }}
@@ -79,42 +100,6 @@ const LoginView = () => {
                     Sign in on the internal platform
                   </Typography>
                 </Box>
-                <Grid
-                  container
-                  spacing={3}
-                >
-                  <Grid
-                    item
-                    xs={12}
-                    md={6}
-                  >
-                    <Button
-                      color="primary"
-                      fullWidth
-                      startIcon={<FacebookIcon />}
-                      onClick={handleSubmit}
-                      size="large"
-                      variant="contained"
-                    >
-                      Login with Facebook
-                    </Button>
-                  </Grid>
-                  <Grid
-                    item
-                    xs={12}
-                    md={6}
-                  >
-                    <Button
-                      fullWidth
-                      startIcon={<GoogleIcon />}
-                      onClick={handleSubmit}
-                      size="large"
-                      variant="contained"
-                    >
-                      Login with Google
-                    </Button>
-                  </Grid>
-                </Grid>
                 <Box
                   mt={3}
                   mb={1}
@@ -124,7 +109,7 @@ const LoginView = () => {
                     color="textSecondary"
                     variant="body1"
                   >
-                    or login with email address
+                    login with Username and Password
                   </Typography>
                 </Box>
                 <TextField
@@ -165,20 +150,6 @@ const LoginView = () => {
                     Sign in now
                   </Button>
                 </Box>
-                <Typography
-                  color="textSecondary"
-                  variant="body1"
-                >
-                  Don&apos;t have an account?
-                  {' '}
-                  <Link
-                    component={RouterLink}
-                    to="/register"
-                    variant="h6"
-                  >
-                    Sign up
-                  </Link>
-                </Typography>
               </form>
             )}
           </Formik>
