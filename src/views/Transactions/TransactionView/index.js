@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CustomerListView = () => {
+const TransactionListView = () => {
   const classes = useStyles();
 
   const [transactions, setTransactions] = useState([]);
@@ -64,4 +64,4 @@ const CustomerListView = () => {
   );
 };
 
-export default CustomerListView;
+export default TransactionListView;

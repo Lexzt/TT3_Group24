@@ -13,6 +13,21 @@ import {
   makeStyles
 } from '@material-ui/core';
 
+const states = [
+  {
+    value: 'alabama',
+    label: 'Alabama'
+  },
+  {
+    value: 'new-york',
+    label: 'New York'
+  },
+  {
+    value: 'san-francisco',
+    label: 'San Francisco'
+  }
+];
+
 const useStyles = makeStyles(() => ({
   root: {}
 }));
@@ -20,20 +35,12 @@ const useStyles = makeStyles(() => ({
 const ProfileDetails = ({ className, ...rest }) => {
   const classes = useStyles();
   const [values, setValues] = useState({
-    // firstName: 'Katarina',
-    // lastName: 'Smith',
-    // email: 'demo@devias.io',
-    // phone: '',
-    // state: 'Alabama',
-    // country: 'USA'
-    phoneNumber: '(+65) 96291392',
-    accountKey: 'd075764b-c0de-4c6d-9794-f2de8389fa43',
-    lastName: 'Skiles',
-    username: 'Group24',
-    address: '1025 Jennyfer Stream',
-    email: 'group24@techtrek.com',
-    firstName: 'Ottilie',
-    nric: 'S77831711F'
+    firstName: 'Katarina',
+    lastName: 'Smith',
+    email: 'demo@devias.io',
+    phone: '',
+    state: 'Alabama',
+    country: 'USA'
   });
 
   const handleChange = (event) => {
@@ -99,21 +106,6 @@ const ProfileDetails = ({ className, ...rest }) => {
             >
               <TextField
                 fullWidth
-                label="NRIC"
-                name="nric"
-                onChange={handleChange}
-                required
-                value={values.nric}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid
-              item
-              md={6}
-              xs={12}
-            >
-              <TextField
-                fullWidth
                 label="Email Address"
                 name="email"
                 onChange={handleChange}
@@ -133,9 +125,50 @@ const ProfileDetails = ({ className, ...rest }) => {
                 name="phone"
                 onChange={handleChange}
                 type="number"
-                value={values.phoneNumber}
+                value={values.phone}
                 variant="outlined"
               />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Country"
+                name="country"
+                onChange={handleChange}
+                required
+                value={values.country}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              <TextField
+                fullWidth
+                label="Select State"
+                name="state"
+                onChange={handleChange}
+                required
+                select
+                SelectProps={{ native: true }}
+                value={values.state}
+                variant="outlined"
+              >
+                {states.map((option) => (
+                  <option
+                    key={option.value}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </option>
+                ))}
+              </TextField>
             </Grid>
           </Grid>
         </CardContent>
