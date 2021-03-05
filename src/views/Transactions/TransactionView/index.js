@@ -38,15 +38,7 @@ const TransactionListView = () => {
       };
 
       const result = await axios(config);
-      // setTransactions([...result.data,);
-      setTransactions([
-        ...result.data,
-        ...result.data,
-        ...result.data,
-        ...result.data,
-        ...result.data,
-        ...result.data
-      ]);
+      setTransactions(result.data.sort((a, b) => b.timestamp - a.timestamp));
     };
 
     fetchData();
