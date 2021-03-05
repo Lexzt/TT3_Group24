@@ -31,8 +31,8 @@ const LoginView = () => {
 
   useEffect(async () => {
     const temp = JSON.stringify({
-      username: 'Group24'
-      password: "U1KAc0ZrKyMIzNX"
+      username: 'Group24',
+      password: 'U1KAc0ZrKyMIzNX'
     });
 
     const config = {
@@ -103,12 +103,6 @@ const LoginView = () => {
                     Sign in on the internal platform
                   </Typography>
                 </Box>
-                <Grid
-                  container
-                  spacing={3}
-                >
-
-                </Grid>
                 <Box
                   mt={3}
                   mb={1}
@@ -118,7 +112,7 @@ const LoginView = () => {
                     color="textSecondary"
                     variant="body1"
                   >
-                     login with Username and Password
+                    login with Username and Password
                   </Typography>
                 </Box>
                 <TextField
@@ -159,20 +153,6 @@ const LoginView = () => {
                     Sign in now
                   </Button>
                 </Box>
-                <Typography
-                  color="textSecondary"
-                  variant="body1"
-                >
-                  Don&apos;t have an account?
-                  {' '}
-                  <Link
-                    component={RouterLink}
-                    to="/register"
-                    variant="h6"
-                  >
-                    Sign up
-                  </Link>
-                </Typography>
               </form>
             )}
           </Formik>
