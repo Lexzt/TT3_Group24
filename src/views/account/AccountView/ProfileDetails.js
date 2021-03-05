@@ -7,6 +7,7 @@ import {
   Button,
   Card,
   CardContent,
+  Typography,
   CardHeader,
   Divider,
   Grid,
@@ -70,7 +71,9 @@ const ProfileDetails = ({ className, ...rest }) => {
               md={6}
               xs={12}
             >
-              First Name
+              <Typography color="textPrimary" variant="h5">
+                First Name
+              </Typography>
               <TextField
                 fullWidth
                 helperText="Please specify the first name"
@@ -85,7 +88,9 @@ const ProfileDetails = ({ className, ...rest }) => {
               md={6}
               xs={12}
             >
-              Last Name
+              <Typography color="textPrimary" variant="h5">
+                Last Name
+              </Typography>
               <TextField
                 fullWidth
                 name="lastName"
@@ -99,7 +104,9 @@ const ProfileDetails = ({ className, ...rest }) => {
               md={6}
               xs={12}
             >
-              NRIC
+              <Typography color="textPrimary" variant="h5">
+                NRIC
+              </Typography>
               <TextField
                 fullWidth
                 name="nric"
@@ -113,7 +120,9 @@ const ProfileDetails = ({ className, ...rest }) => {
               md={6}
               xs={12}
             >
-              Email Address
+              <Typography color="textPrimary" variant="h5">
+                Email Address
+              </Typography>
               <TextField
                 fullWidth
                 name="email"
@@ -127,7 +136,9 @@ const ProfileDetails = ({ className, ...rest }) => {
               md={6}
               xs={12}
             >
-              Home Address
+              <Typography color="textPrimary" variant="h5">
+                Home Address
+              </Typography>
               <TextField
                 fullWidth
                 name="address"
@@ -141,7 +152,9 @@ const ProfileDetails = ({ className, ...rest }) => {
               md={6}
               xs={12}
             >
-              Phone Number
+              <Typography color="textPrimary" variant="h5">
+                Phone Number
+              </Typography>
               <TextField
                 fullWidth
                 name="phone"
