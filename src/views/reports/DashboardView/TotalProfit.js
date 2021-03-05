@@ -85,7 +85,7 @@ const TotalProfit = ({ className, ...rest }) => {
             <Typography color="textSecondary" variant="caption">
               {moment
                 .unix(currentPrice.timestamp)
-                .format('dddd, MMMM Do, YYYY h:mm:ss A')}
+                .format('dddd, MMMM Do, YYYY h:mm A')}
             </Typography>
           </Grid>
           <Grid item>
