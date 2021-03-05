@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import axios from 'axios';
 import {
   Box,
   Button,
@@ -70,10 +71,6 @@ const LoginView = () => {
               username: 'Group24',
               password: 'U1KAc0ZrKyMIzNX'
             }}
-            validationSchema={Yup.object().shape({
-              username: Yup.string()('Must be a valid username').max(255).required('username is required'),
-              password: Yup.string().max(255).required('Password is required')
-            })}
             onSubmit={() => {
               navigate('/app/dashboard', { replace: true });
             }}
