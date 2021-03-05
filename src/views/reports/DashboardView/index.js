@@ -59,15 +59,9 @@ const Dashboard = () => {
           >
             <Sales />
           </Grid> */}
-          {/* <Grid
-            item
-            lg={4}
-            md={6}
-            xl={3}
-            xs={12}
-          >
+          <Grid item lg={4} md={6} xl={3} xs={12}>
             <TrafficByDevice />
-          </Grid> */}
+          </Grid>
           {/* <Grid
             item
             lg={4}

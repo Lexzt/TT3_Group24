@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Container, makeStyles } from '@material-ui/core';
 import axios from 'axios';
+import moment from 'moment';
 
 import Page from 'src/components/Page';
 import Results from './Results';
@@ -38,6 +39,12 @@ const TransactionListView = () => {
       };
 
       const result = await axios(config);
+      // console.log(
+      //   result.data
+      //     .sort((a, b) => b.timestamp - a.timestamp)
+      //     .map(e => [e.assetPrice, e.timestamp])
+      //     .map(e => [e[0], moment.unix(e[1]).toDate()])
+      // );
       setTransactions(result.data.sort((a, b) => b.timestamp - a.timestamp));
     };
 

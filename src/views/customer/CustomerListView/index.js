@@ -40,11 +40,7 @@ const CustomerListView = () => {
       };
 
       const result = await axios(config);
-      console.log(result.data);
       setTransactions(result.data.sort((a, b) => a.timestamp - b.timestamp));
-      // setTransactions(
-      //   [...result.data].sort((a, b) => a.timestamp - b.timestamp)
-      // );
     };
 
     fetchData();

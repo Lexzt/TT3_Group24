@@ -58,7 +58,7 @@ const Results = ({ className, transactions, ...rest }) => {
                 .map(transaction => (
                   <TableRow
                     hover
-                    // key={transaction.transactionId}
+                    key={transaction.transactionId}
                     selected={
                       transactions.indexOf(transaction.transactionId) !== -1
                     }
