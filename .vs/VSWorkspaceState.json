@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\layouts",
+    "\\src\\layouts\\DashboardLayout",
+    "\\src\\layouts\\DashboardLayout\\NavBar",
+    "\\src\\views",
+    "\\src\\views\\customer",
+    "\\src\\views\\customer\\CustomerListView",
+    "\\src\\views\\reports",
+    "\\src\\views\\reports\\DashboardView"
+  ],
+  "SelectedNode": "\\src\\views\\reports\\DashboardView\\Budget.js",
+  "PreviewInSolutionExplorer": false
+}

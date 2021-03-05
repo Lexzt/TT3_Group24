@@ -36,6 +36,8 @@
     "no-undef": "off",
     "max-len": "off",
     "react/jsx-curly-newline":"off",
-    "implicit-arrow-linebreak":"off"
+    "implicit-arrow-linebreak":"off",
+    "object-curly-newline":"off",
+    "react/jsx-one-expression-per-line":"off"
   }
 }
