@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import axios from 'axios';
+
 // import moment from 'moment';
 import {
   Avatar,
@@ -14,23 +16,6 @@ import {
   makeStyles
 } from '@material-ui/core';
 
-const user = {
-  avatar: '/static/images/avatars/avatar_6.png',
-  // city: 'Los Angeles',
-  // country: 'USA',
-  // jobTitle: 'Senior Developer',
-  // name: 'Katarina Smith',
-  // timezone: 'GTM-7'
-  phoneNumber: '(+65) 96291392',
-  accountKey: 'd075764b-c0de-4c6d-9794-f2de8389fa43',
-  lastName: 'Skiles',
-  username: 'Group24',
-  address: '1025 Jennyfer Stream',
-  email: 'group24@techtrek.com',
-  firstName: 'Ottilie',
-  nric: 'S77831711F'
-};
-
 const useStyles = makeStyles(() => ({
   root: {},
   avatar: {
@@ -41,6 +26,33 @@ const useStyles = makeStyles(() => ({
 
 const Profile = ({ className, ...rest }) => {
   const classes = useStyles();
+
+  const [loginDetails, setLoginDetails] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const temp = JSON.stringify({
+        username: 'Group24',
+        password: 'U1KAc0ZrKyMIzNX'
+      });
+
+      const config = {
+        method: 'post',
+        url: 'https://849rs099m3.execute-api.ap-southeast-1.amazonaws.com/techtrek/login',
+        headers: {
+          'x-api-key': '7hurCytKCQx5oqxCHwgx7K7jkNtBp4A71JmesZ0e',
+          'Content-Type': 'application/json'
+        },
+        data: temp
+      };
+
+      const result = await axios(config);
+      console.log(result);
+      setLoginDetails(result.data);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <Card
@@ -55,20 +67,20 @@ const Profile = ({ className, ...rest }) => {
         >
           <Avatar
             className={classes.avatar}
-            src={user.avatar}
+            src="/static/images/avatars/avatar_6.png"
           />
           <Typography
             color="textPrimary"
             gutterBottom
             variant="h3"
           >
-            {user.username}
+            {loginDetails.username}
           </Typography>
           <Typography
             color="textSecondary"
             variant="body1"
           >
-            {user.accountKey}
+            {loginDetails.accountKey}
           </Typography>
         </Box>
       </CardContent>
