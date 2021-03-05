@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
@@ -19,29 +20,33 @@ const useStyles = makeStyles(() => ({
 
 const ProfileDetails = ({ className, ...rest }) => {
   const classes = useStyles();
-  const [values, setValues] = useState({
-    // firstName: 'Katarina',
-    // lastName: 'Smith',
-    // email: 'demo@devias.io',
-    // phone: '',
-    // state: 'Alabama',
-    // country: 'USA'
-    phoneNumber: '(+65) 96291392',
-    accountKey: 'd075764b-c0de-4c6d-9794-f2de8389fa43',
-    lastName: 'Skiles',
-    username: 'Group24',
-    address: '1025 Jennyfer Stream',
-    email: 'group24@techtrek.com',
-    firstName: 'Ottilie',
-    nric: 'S77831711F'
-  });
 
-  const handleChange = (event) => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value
-    });
-  };
+  const [loginDetails, setLoginDetails] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const temp = JSON.stringify({
+        username: 'Group24',
+        password: 'U1KAc0ZrKyMIzNX'
+      });
+
+      const config = {
+        method: 'post',
+        url: 'https://849rs099m3.execute-api.ap-southeast-1.amazonaws.com/techtrek/login',
+        headers: {
+          'x-api-key': '7hurCytKCQx5oqxCHwgx7K7jkNtBp4A71JmesZ0e',
+          'Content-Type': 'application/json'
+        },
+        data: temp
+      };
+
+      const result = await axios(config);
+      console.log(result);
+      setLoginDetails(result.data);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <form
@@ -66,14 +71,13 @@ const ProfileDetails = ({ className, ...rest }) => {
               md={6}
               xs={12}
             >
+              First Name
               <TextField
                 fullWidth
                 helperText="Please specify the first name"
-                label="First name"
                 name="firstName"
-                onChange={handleChange}
                 required
-                value={values.firstName}
+                value={loginDetails.firstName}
                 variant="outlined"
               />
             </Grid>
@@ -82,13 +86,12 @@ const ProfileDetails = ({ className, ...rest }) => {
               md={6}
               xs={12}
             >
+              Last Name
               <TextField
                 fullWidth
-                label="Last name"
                 name="lastName"
-                onChange={handleChange}
                 required
-                value={values.lastName}
+                value={loginDetails.lastName}
                 variant="outlined"
               />
             </Grid>
@@ -97,13 +100,12 @@ const ProfileDetails = ({ className, ...rest }) => {
               md={6}
               xs={12}
             >
+              NRIC
               <TextField
                 fullWidth
-                label="NRIC"
                 name="nric"
-                onChange={handleChange}
                 required
-                value={values.nric}
+                value={loginDetails.nric}
                 variant="outlined"
               />
             </Grid>
@@ -112,13 +114,12 @@ const ProfileDetails = ({ className, ...rest }) => {
               md={6}
               xs={12}
             >
+              Email Address
               <TextField
                 fullWidth
-                label="Email Address"
                 name="email"
-                onChange={handleChange}
                 required
-                value={values.email}
+                value={loginDetails.email}
                 variant="outlined"
               />
             </Grid>
@@ -127,31 +128,31 @@ const ProfileDetails = ({ className, ...rest }) => {
               md={6}
               xs={12}
             >
+              Home Address
               <TextField
                 fullWidth
-                label="Phone Number"
+                name="address"
+                required
+                value={loginDetails.address}
+                variant="outlined"
+              />
+            </Grid>
+            <Grid
+              item
+              md={6}
+              xs={12}
+            >
+              Phone Number
+              <TextField
+                fullWidth
                 name="phone"
-                onChange={handleChange}
-                type="number"
-                value={values.phoneNumber}
+                value={loginDetails.phoneNumber}
                 variant="outlined"
               />
             </Grid>
           </Grid>
         </CardContent>
         <Divider />
-        <Box
-          display="flex"
-          justifyContent="flex-end"
-          p={2}
-        >
-          <Button
-            color="primary"
-            variant="contained"
-          >
-            Save details
-          </Button>
-        </Box>
       </Card>
     </form>
   );
