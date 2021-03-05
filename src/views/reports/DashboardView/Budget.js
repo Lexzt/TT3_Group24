@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
@@ -14,6 +14,7 @@ import {
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import MoneyIcon from '@material-ui/icons/Money';
 import axios from 'axios';
+import * as CONST from '../../../utils/constants';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -38,27 +39,28 @@ const Budget = ({ className, ...rest }) => {
 
   const [cashBalance, setCashBalance] = useState(0);
 
-  useEffect(async () => {
-    const temp = JSON.stringify({
-      accountKey: 'd075764b-c0de-4c6d-9794-f2de8389fa43'
-    });
+  useEffect(() => {
+    const fetchData = async () => {
+      const temp = JSON.stringify({
+        accountKey: 'd075764b-c0de-4c6d-9794-f2de8389fa43'
+      });
 
-    const config = {
-      method: 'post',
-      url:
-        'https://849rs099m3.execute-api.ap-southeast-1.amazonaws.com/techtrek/balance',
-      headers: {
-        'x-api-key': '7hurCytKCQx5oqxCHwgx7K7jkNtBp4A71JmesZ0e',
-        'Content-Type': 'application/json'
-      },
-      data: temp
+      const config = {
+        method: 'post',
+        url: `${CONST.BASE_URL}${CONST.BALANCE}`,
+        headers: {
+          'x-api-key': `${CONST.X_API_KEY}`,
+          'Content-Type': 'application/json'
+        },
+        data: temp
+      };
+
+      const result = await axios(config);
+      setCashBalance(result.data.assetBalance); // Might wanna round to 2dp after that
     };
 
-    await axios(config).then(response => {
-      console.log(JSON.stringify(response.data.assetBalance));
-      setCashBalance(response.data.assetBalance);
-    });
-  });
+    fetchData();
+  }, []);
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
@@ -66,7 +68,7 @@ const Budget = ({ className, ...rest }) => {
         <Grid container justify="space-between" spacing={3}>
           <Grid item>
             <Typography color="textSecondary" gutterBottom variant="h6">
-              BUDGET
+              Asset Balance
             </Typography>
             <Typography color="textPrimary" variant="h3">
               {cashBalance}
@@ -78,7 +80,7 @@ const Budget = ({ className, ...rest }) => {
             </Avatar>
           </Grid>
         </Grid>
-        <Box mt={2} display="flex" alignItems="center">
+        {/* <Box mt={2} display="flex" alignItems="center">
           <ArrowDownwardIcon className={classes.differenceIcon} />
           <Typography className={classes.differenceValue} variant="body2">
             12%
@@ -86,7 +88,7 @@ const Budget = ({ className, ...rest }) => {
           <Typography color="textSecondary" variant="caption">
             Since last month
           </Typography>
-        </Box>
+        </Box> */}
       </CardContent>
     </Card>
   );
