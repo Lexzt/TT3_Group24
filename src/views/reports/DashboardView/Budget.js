@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import MoneyIcon from '@material-ui/icons/Money';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,6 +35,31 @@ const useStyles = makeStyles((theme) => ({
 
 const Budget = ({ className, ...rest }) => {
   const classes = useStyles();
+
+  const [cashBalance, setCashBalance] = useState(0);
+
+  useEffect(async () => {
+    const temp = JSON.stringify({
+      accountKey: 'd075764b-c0de-4c6d-9794-f2de8389fa43'
+    });
+
+    const config = {
+      method: 'post',
+      url:
+        'https://849rs099m3.execute-api.ap-southeast-1.amazonaws.com/techtrek/balance',
+      headers: {
+        'x-api-key': '7hurCytKCQx5oqxCHwgx7K7jkNtBp4A71JmesZ0e',
+        'Content-Type': 'application/json'
+      },
+      data: temp
+    };
+
+    await axios(config).then(response => {
+      console.log(JSON.stringify(response.data.assetBalance));
+      setCashBalance(JSON.stringify(response.data.assetBalance));
+    // console.log(data);
+    });
+  });
 
   return (
     <Card
@@ -58,7 +84,7 @@ const Budget = ({ className, ...rest }) => {
               color="textPrimary"
               variant="h3"
             >
-              $24,000
+              {cashBalance}
             </Typography>
           </Grid>
           <Grid item>
