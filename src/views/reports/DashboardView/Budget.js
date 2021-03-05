@@ -37,7 +37,8 @@ const useStyles = makeStyles(theme => ({
 const Budget = ({ className, ...rest }) => {
   const classes = useStyles();
 
-  const [cashBalance, setCashBalance] = useState(0);
+  const [cashBalance, setCashBalance] = useState([]);
+  const [assetBalance, setAssetBalance] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,7 +57,8 @@ const Budget = ({ className, ...rest }) => {
       };
 
       const result = await axios(config);
-      setCashBalance(result.data.assetBalance); // Might wanna round to 2dp after that
+      setCashBalance(result.data.cashBalance.toFixed(2)); // Might wanna round to 2dp after that
+      setAssetBalance(result.data.assetBalance.toFixed(2));
     };
 
     fetchData();
@@ -78,9 +80,18 @@ const Budget = ({ className, ...rest }) => {
             </Typography>
           </Grid>
           <Grid item>
-            <Avatar className={classes.avatar}>
+            <Typography color="textSecondary" gutterBottom variant="h6">
+              Asset Balance
+            </Typography>
+            <Typography
+              color="textPrimary"
+              variant="h3"
+            >
+              {assetBalance}
+            </Typography>
+            {/* <Avatar className={classes.avatar}>
               <MoneyIcon />
-            </Avatar>
+            </Avatar> */}
           </Grid>
         </Grid>
         {/* <Box mt={2} display="flex" alignItems="center">
