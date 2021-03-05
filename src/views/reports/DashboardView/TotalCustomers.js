@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
@@ -13,8 +13,9 @@ import {
 } from '@material-ui/core';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import PeopleIcon from '@material-ui/icons/PeopleOutlined';
+import axios from 'axios';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     height: '100%'
   },
@@ -34,30 +35,40 @@ const useStyles = makeStyles((theme) => ({
 
 const TotalCustomers = ({ className, ...rest }) => {
   const classes = useStyles();
+  // const [data, setData] = useState({ hits: [] });
+
+  useEffect(async () => {
+    const temp = JSON.stringify({
+      accountKey: 'd075764b-c0de-4c6d-9794-f2de8389fa43'
+    });
+
+    const config = {
+      method: 'post',
+      url:
+        'https://849rs099m3.execute-api.ap-southeast-1.amazonaws.com/techtrek/transactions/view',
+      headers: {
+        'x-api-key': '7hurCytKCQx5oqxCHwgx7K7jkNtBp4A71JmesZ0e',
+        'Content-Type': 'application/json'
+      },
+      data: temp
+    };
+
+    await axios(config).then(response => {
+      console.log(JSON.stringify(response.data));
+      // setData();
+    });
+    // console.log(data);
+  });
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardContent>
-        <Grid
-          container
-          justify="space-between"
-          spacing={3}
-        >
+        <Grid container justify="space-between" spacing={3}>
           <Grid item>
-            <Typography
-              color="textSecondary"
-              gutterBottom
-              variant="h6"
-            >
+            <Typography color="textSecondary" gutterBottom variant="h6">
               TOTAL CUSTOMERS
             </Typography>
-            <Typography
-              color="textPrimary"
-              variant="h3"
-            >
+            <Typography color="textPrimary" variant="h3">
               1,600
             </Typography>
           </Grid>
@@ -67,22 +78,12 @@ const TotalCustomers = ({ className, ...rest }) => {
             </Avatar>
           </Grid>
         </Grid>
-        <Box
-          mt={2}
-          display="flex"
-          alignItems="center"
-        >
+        <Box mt={2} display="flex" alignItems="center">
           <ArrowUpwardIcon className={classes.differenceIcon} />
-          <Typography
-            className={classes.differenceValue}
-            variant="body2"
-          >
+          <Typography className={classes.differenceValue} variant="body2">
             16%
           </Typography>
-          <Typography
-            color="textSecondary"
-            variant="caption"
-          >
+          <Typography color="textSecondary" variant="caption">
             Since last month
           </Typography>
         </Box>
