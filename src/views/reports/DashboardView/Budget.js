@@ -15,7 +15,7 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import MoneyIcon from '@material-ui/icons/Money';
 import axios from 'axios';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     height: '100%'
   },
@@ -55,30 +55,19 @@ const Budget = ({ className, ...rest }) => {
     };
 
     await axios(config).then(response => {
-      console.log(JSON.stringify(response.data.assetBalance));
-      setCashBalance(JSON.stringify(response.data.assetBalance));
+      console.log(JSON.stringify(response.data.cashBalance));
+      setCashBalance(JSON.stringify(response.data.cashBalance));
     // console.log(data);
     });
   });
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardContent>
-        <Grid
-          container
-          justify="space-between"
-          spacing={3}
-        >
+        <Grid container justify="space-between" spacing={3}>
           <Grid item>
-            <Typography
-              color="textSecondary"
-              gutterBottom
-              variant="h6"
-            >
-              BUDGET
+            <Typography color="textSecondary" gutterBottom variant="h6">
+              Cash Balance
             </Typography>
             <Typography
               color="textPrimary"
@@ -93,22 +82,12 @@ const Budget = ({ className, ...rest }) => {
             </Avatar>
           </Grid>
         </Grid>
-        <Box
-          mt={2}
-          display="flex"
-          alignItems="center"
-        >
+        <Box mt={2} display="flex" alignItems="center">
           <ArrowDownwardIcon className={classes.differenceIcon} />
-          <Typography
-            className={classes.differenceValue}
-            variant="body2"
-          >
+          <Typography className={classes.differenceValue} variant="body2">
             12%
           </Typography>
-          <Typography
-            color="textSecondary"
-            variant="caption"
-          >
+          <Typography color="textSecondary" variant="caption">
             Since last month
           </Typography>
         </Box>
