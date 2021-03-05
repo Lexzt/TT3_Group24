@@ -112,7 +112,7 @@ const ProfileDetails = ({ className, ...rest }) => {
       {...rest}
     >
       <Card>
-        {hasError ? <div>{error}</div> : <div>no error</div>}
+        {hasError ? <div>{error}</div> : <div></div>}
         <CardHeader
           subheader="Please input your amount and buy/sell"
           title="Buy Asset"

@@ -39,10 +39,10 @@ const TotalProfit = ({ className, ...rest }) => {
         accountKey: 'd075764b-c0de-4c6d-9794-f2de8389fa43'
       });
 
-      console.log(fetchData);
       const config = {
         method: 'post',
-        url: 'https://849rs099m3.execute-api.ap-southeast-1.amazonaws.com/techtrek/pricing/current',
+        url:
+          'https://849rs099m3.execute-api.ap-southeast-1.amazonaws.com/techtrek/pricing/current',
         headers: {
           'x-api-key': '7hurCytKCQx5oqxCHwgx7K7jkNtBp4A71JmesZ0e',
           'Content-Type': 'application/json'
@@ -51,35 +51,20 @@ const TotalProfit = ({ className, ...rest }) => {
       };
 
       const result = await axios(config);
-      console.log(result.data);
       setCurrentPrice(result.data);
     };
     fetchData();
   }, []);
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <CardContent>
-        <Grid
-          container
-          justify="space-between"
-          spacing={3}
-        >
+        <Grid container justify="space-between" spacing={3}>
           <Grid item>
-            <Typography
-              color="textSecondary"
-              gutterBottom
-              variant="h6"
-            >
+            <Typography color="textSecondary" gutterBottom variant="h6">
               CURRENT PRICE
             </Typography>
-            <Typography
-              color="textPrimary"
-              variant="h3"
-            >
+            <Typography color="textPrimary" variant="h3">
               {`${currentPrice.assetSymbol} ${currentPrice.price}`}
             </Typography>
             <Typography color="textSecondary" variant="caption">

@@ -14,9 +14,6 @@ import {
   makeStyles,
   useTheme
 } from '@material-ui/core';
-import LaptopMacIcon from '@material-ui/icons/LaptopMac';
-import PhoneIcon from '@material-ui/icons/Phone';
-import TabletIcon from '@material-ui/icons/Tablet';
 import * as CONST from '../../../utils/constants';
 
 const useStyles = makeStyles(() => ({
@@ -138,14 +135,10 @@ const TrafficByDevice = ({ className, ...rest }) => {
         }
         map.set(e.assetPrice, map.get(e.assetPrice) + 1);
       });
-      console.log(map);
-      console.log(data.datasets);
       map.forEach((v, k) => {
-        console.log(v);
         data.datasets[0].data.push(v);
         data.datasets[0].backgroundColor.push(getRandomColor());
       });
-      console.log(data);
       setTransactions(result.data);
     };
 
